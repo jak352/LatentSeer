@@ -1,12 +1,12 @@
 /*
-  ==============================================================================
-
-    This file was auto-generated!
-
-    It contains the basic framework code for a JUCE plugin processor.
-
-  ==============================================================================
-*/
+ ==============================================================================
+ 
+ This file was auto-generated!
+ 
+ It contains the basic framework code for a JUCE plugin processor.
+ 
+ ==============================================================================
+ */
 
 #pragma once
 
@@ -14,43 +14,43 @@
 
 //==============================================================================
 /**
-*/
+ */
 class LatentSeerAudioProcessor  : public AudioProcessor
 {
 public:
     //==============================================================================
     LatentSeerAudioProcessor();
     ~LatentSeerAudioProcessor();
-
+    
     //==============================================================================
     void prepareToPlay (double sampleRate, int samplesPerBlock) override;
     void releaseResources() override;
-
-   #ifndef JucePlugin_PreferredChannelConfigurations
+    
+#ifndef JucePlugin_PreferredChannelConfigurations
     bool isBusesLayoutSupported (const BusesLayout& layouts) const override;
-   #endif
-
+#endif
+    
     void processBlock (AudioBuffer<float>&, MidiBuffer&) override;
-
+    
     //==============================================================================
     AudioProcessorEditor* createEditor() override;
     bool hasEditor() const override;
-
+    
     //==============================================================================
     const String getName() const override;
-
+    
     bool acceptsMidi() const override;
     bool producesMidi() const override;
     bool isMidiEffect() const override;
     double getTailLengthSeconds() const override;
-
+    
     //==============================================================================
     int getNumPrograms() override;
     int getCurrentProgram() override;
     void setCurrentProgram (int index) override;
     const String getProgramName (int index) override;
     void changeProgramName (int index, const String& newName) override;
-
+    
     //==============================================================================
     void getStateInformation (MemoryBlock& destData) override;
     void setStateInformation (const void* data, int sizeInBytes) override;
@@ -62,29 +62,43 @@ public:
     void checkIfThresholdExceeded(const int bufferLength);
     
     float mGain { 0.5 };
-    
-    int mDelay_ms { -40 }; //Add this myself to make delay time in milliseconds
-    float mDelayVolume { 0.5 }; //Add this myself to make amplitude of delay signal
-    int mBPM { 120 }; //Add this to make default BPM
-    int mBeatsPerBar { 4 }; //Add this to make default Beats Per Bar
-    float mTransientThreshInDelayed { -12.0 }; //Threshold over which note is detected in delayed signal
+    /// Add this myself to make delay time in milliseconds
+    int mDelay_ms { -40 };
+    /// Add this myself to make amplitude of delay signal
+    float mDelayVolume { 0.5 };
+    /// Add this to make default BPM
+    int mBPM { 120 };
+    /// Add this to make default Beats Per Bar
+    int mBeatsPerBar { 4 };
+    /// Threshold over which note is detected in delayed signal
+    float mTransientThreshInDelayed { -12.0 };
     bool mDelayBufferThresholdExceeded { false };
     int mTransientCounter { 0 };
     int mPitchTransientCounter { 0 };
     float mDelayBufferMagnitude { 0 };
-    float mReleaseThreshInDelayed { -30.0 }; //Threshold below which note is assumed to have released to allow future retriggering
-    int mLowestFrequency { 30 }; //Threshold below which note is assumed to have released to allow future retriggering
+    /// Threshold below which note is assumed to have released to allow future retriggering
+    float mReleaseThreshInDelayed { -30.0 };
+    /// Threshold below which note is assumed to have released to allow future retriggering
+    int mLowestFrequency { 30 };
     int mReleaseCounter { 0 };
-    bool noFadeIn = true; // true means no fade
-    int mNumBuffersForRelease = { 8 }; //Number of audio buffers that delay buffer plays for;
-    float mReset_ms = { 20 }; //Number of milliseconds that must be under release threshold for release
+    ///  true means no fade
+    bool noFadeIn = true;
+    /// Number of audio buffers that delay buffer plays for;
+    int mNumBuffersForRelease = { 8 };
+    /// Number of milliseconds that must be under release threshold for release
+    float mReset_ms = { 20 };
     float mPitchChangeThreshold = { 0.75 };
     bool mNoFadeOut = { true };
     bool mNoFadeIn = { true };
-    float mNormalisedXCorMax = { 0 }; //Maximum of the xcorrelation between signal and signal a few ms back in delay buffer
-    int mNBack { 3840 }; // mSampleRate*0.020 at 192 kHz for instance. Number of samples back in audio to compare across to get cross-correlation for pitch change detection. Calculated in prepare to play. Would need to be careful with size of mDelayBufferPitch if this is not to be changed during runtime
-    int mNLagBuffers { 0 }; //Counter for offseting lag in cross-correlation
-    int mPitchDetectCounter { 0 }; //Counter for getting multiple pitch change detections in a row
+    /// Maximum of the xcorrelation between signal and signal a few ms back in delay buffer
+    float mNormalisedXCorMax = { 0 };
+    /** mSampleRate*0.020 at 192 kHz for instance. Number of samples back in audio to compare across to get cross-correlation for pitch change detection. Calculated in prepare to play. Would need to be careful with size of mDelayBufferPitch if this is not to be changed during runtime
+     */
+    int mNBack { 3840 };
+    /// Counter for offseting lag in cross-correlation
+    int mNLagBuffers { 0 };
+    /// Counter for getting multiple pitch change detections in a row
+    int mPitchDetectCounter { 0 };
     
 private:
     //==============================================================================
