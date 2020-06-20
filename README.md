@@ -29,15 +29,15 @@ Play along to a metronome (say by switching on the metronome in the DAW/host). C
 
 ### Install
 
-The current software can be used by installing JUCE and using the Projucer software. The file LatentSeer.jucer and source code can be used within an effect plugin. Open in IDE (XCode on mac or Virtual Studio 2019 on windows) then choose build. This generates standalone app and VST3 plugins (and AU plugin .component file). The plugins are visible to the host on Mac and may be found in the Builds folder for windows.
+The current software can be used by installing JUCE and using the Projucer software. The file LatentSeer.jucer and source code can be used within an effect plugin. Open in IDE (XCode on mac or Virtual Studio 2019 on windows) then choose build. This generates standalone app and VST3 plugins (and AU plugin .component file). The plugins are visible to the host on Mac and may be found in the Builds folder for windows. In windows the VST3 can be manually copied into C:/Program Files/Common FIles/VST3 and a DAW such as REAPER opened. On Mac the plugin is installed in the user's library so it is detected when the DAW is opened. 
 
 ### Use
 
-In windows the VST3 can be manually copied into C:/Program Files/Common FIles/VST3 and a DAW such as REAPER opened. On Mac the plugin is installed in the user's library so it is detected when the DAW is opened. Add the effect onto a track within the DAW to process the sound within the track. 
-
-For standalone operation the windows .exe or Mac OSX app can be opened and the menu used to select inputs and outputs.
+Add the effect VST or AU plugin onto a track within the DAW/host to process the sound within the track. For standalone operation the windows .exe or Mac OSX app can be opened and the menu used to select inputs and outputs.
 
 Currently, if using online jamming software such as JamKazam or soundjack.eu then the plugin or standalone app should have its output fed into the input of the jamming software using some kind of digital or analogue loopback, or the software could be used at the receiving end. The ideas is for transients to hit the beat (with the negative "Delay Time (ms)" in LatentSeer approximately matching the latency over for internet communication) with the sustain of the pitches played following immediately after.
+
+The effect can also be used as a quirky delay effect in general.
 
 ## License
 
