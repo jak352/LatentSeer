@@ -25,9 +25,19 @@ Users of the plugin can specify a BPM and number of beats per bar. The software 
 
 ## Instructions
 
+Play along to a metronome (say by switching on the metronome in the DAW/host). Currently the BPM on the plugin should be set manually to match the BPM of the metronome. When the sound level coming into the effect changes from a quiet level to a level over the "Attach thresh." decibel value then that transient attack will be played back one bar later based on the Beats Per Minute ("BPM") and number of "Beats per Bar" with a time offset determined by the "Delay Time (ms)" control. When the "Delay Time" is equal to -40 milliseconds, the transient sounds 40 milliseconds earlier than it was played in the previous bar. Similarly, when the musical pitch changes, the start of the new pitch is played back one bar later with the timing offset by the value in the "Delay Time (ms)" setting. Pitch change detection is based on the cross-correlation of the signal with a delayed version of the signal (with a normalisation applied in the manner of Philip McLeod and Geoff Wyvill's paper "A SMARTER WAY TO FIND PITCH"). Increasing the pitch sensitivity means more frequency pitch change detections (at the risk of false pitch change detections). The "Min. Freq. (Hz)" control should be increased for detection of pitch changes on higher pitch instruments (as this controls the length of the time that the normalised cross-correlation is required to be under the "Pitch Sensitivity" value before a pitch change is detected). The volume of the "Dry" and "Delay" signals can be independently controlled with the original volumes achieved with both set to 1.
+
 ### Install
 
+The current software can be used by installing JUCE and using the Porjucer software. The file LatentSeer.jucer and source code can be used within an effect plugin. The Projucer software and then opening in IDE (XCode on mac or Virtual Studio 2019 on windows) then chosing build. This generates standalone app and VST3 plugins (and AU plugin .component file). The plugins are visible to the host on Mac and may be found in the Builds folder for windows.
+
 ### Use
+
+In windows the VST3 can be manually copied into C:/Program Files/Common FIles/VST3 and a DAW such as REAPER opened. On Mac the plugin is installed in the user's library so it is detected when the DAW is opened. Add the effect onto a track within the DAW to process the sound within the track. 
+
+For standalone operation the windows .exe or Mac OSX app can be opened and the menu used to select inputs and outputs.
+
+Currently, if using online jamming software such as JamKazam or soundjack.eu then the plugin or standalone app should have its output fed into the input of the jamming software using some kind of digital or analogue loopback, or the software could be used at the receiving end. The ideas is for transients to hit the beat (with the negative "Delay Time (ms)" in LatentSeer approximately matching the latency over for internet communication) with the sustain of the pitches played following immediately after.
 
 ## License
 
