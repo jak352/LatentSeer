@@ -29,7 +29,7 @@ Play along to a metronome (say by switching on the metronome in the DAW/host). C
 
 ### Install
 
-The current software can be used by installing JUCE and using the Projucer software. The file LatentSeer.jucer and source code can be used within an effect plugin. Open in IDE (XCode on mac or Virtual Studio 2019 on windows) then choose build. This generates standalone app and VST3 plugins (and AU plugin .component file). The plugins are visible to the host on Mac and may be found in the Builds folder for windows. In windows the VST3 can be manually copied into C:/Program Files/Common FIles/VST3 and a DAW such as REAPER opened. On Mac the plugin is installed in the user's library so it is detected when the DAW is opened. 
+The current software can be used by installing JUCE. The file LatentSeer.jucer can be opened in the Projucer software then click to open in IDE (XCode on mac or Virtual Studio 2019 on windows) then choose build within the IDE. This generates standalone app and VST3 plugins (and AU plugin .component file). The plugins are visible to the host on Mac and may be found in the Builds folder for windows. In windows the VST3 can be manually copied into C:/Program Files/Common FIles/VST3 and a DAW such as REAPER opened. On Mac the plugin is installed in the user's library so it is detected when the DAW is opened. 
 
 ### Use
 
