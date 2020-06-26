@@ -54,10 +54,17 @@ public:
     //==============================================================================
     void getStateInformation (MemoryBlock& destData) override;
     void setStateInformation (const void* data, int sizeInBytes) override;
+    //==============================================================================
     ///
     LatentSeer latentSeer;
-
+    //==============================================================================
+    foleys::LevelMeterSource& getMeterSource()
+    {
+        return meterSource;
+    }
+    //==============================================================================
 private:
+    foleys::LevelMeterSource meterSource;
     //==============================================================================
     JUCE_DECLARE_NON_COPYABLE_WITH_LEAK_DETECTOR (LatentSeerAudioProcessor)
 };

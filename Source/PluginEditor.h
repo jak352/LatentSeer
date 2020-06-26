@@ -33,6 +33,9 @@ public:
     //virtual bool StatusLight (StatusLight* light);
     
 private:
+    foleys::LevelMeterLookAndFeel lnf;
+    foleys::LevelMeter meter { foleys::LevelMeter::Minimal }; // See foleys::LevelMeter::MeterFlags for options
+            
     Slider mGainSlider;
     Slider mDelay_ms_Slider;
     Slider mDelayVolume_Slider;

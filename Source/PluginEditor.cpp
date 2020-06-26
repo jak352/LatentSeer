@@ -15,7 +15,9 @@
 LatentSeerAudioProcessorEditor::LatentSeerAudioProcessorEditor (LatentSeerAudioProcessor& p)
     : AudioProcessorEditor (&p), processor (p)
 {
-    
+    // adjust the colours to how you like them, e.g.
+
+    // ...
     mBPM_Slider.setSliderStyle (Slider::SliderStyle::LinearVertical);
     //Style of text box (50 and 20 are size):
     mBPM_Slider.setTextBoxStyle (Slider::TextBoxBelow, true, 50, 20);
@@ -124,6 +126,12 @@ LatentSeerAudioProcessorEditor::LatentSeerAudioProcessorEditor (LatentSeerAudioP
     //Make it a visible child of LatentSeerAudioProcessorEditor:
     addAndMakeVisible (mLowestFrequency_Slider);
     
+    
+    lnf.setColour (foleys::LevelMeter::lmMeterGradientLowColour, juce::Colours::green);
+
+    meter.setLookAndFeel (&lnf);
+    meter.setMeterSource (&processor.getMeterSource());
+    addAndMakeVisible (meter);
     // Make sure that before the constructor has finished, you've set the
     // editor's size to whatever you need it to be.
     setSize (950, 400);
@@ -131,6 +139,7 @@ LatentSeerAudioProcessorEditor::LatentSeerAudioProcessorEditor (LatentSeerAudioP
 
 LatentSeerAudioProcessorEditor::~LatentSeerAudioProcessorEditor()
 {
+    meter.setLookAndFeel (nullptr);
 }
 
 //==============================================================================
@@ -172,6 +181,8 @@ void LatentSeerAudioProcessorEditor::resized()
     //mReleaseThreshInDelayed_Slider.setBounds(getWidth() / 2 + 200, getHeight() / 2 - 75, 100, 150); // position and size
     mPitchChangeThreshold_Slider.setBounds(getWidth() / 2 + 200, getHeight() / 2 - 75, 100, 150); // position and size
     mLowestFrequency_Slider.setBounds(getWidth() / 2 + 300, getHeight() / 2 - 75, 100, 150); // position and size
+    meter.setBounds(10, getHeight()/2 - 180, 60, 365);
+    
 }
 
 void LatentSeerAudioProcessorEditor::sliderValueChanged (Slider *slider)
