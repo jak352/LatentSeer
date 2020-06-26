@@ -13,6 +13,8 @@
             file="Source/PluginEditor.cpp"/>
       <FILE id="kjL4bj" name="PluginEditor.h" compile="0" resource="0" file="Source/PluginEditor.h"/>
     </GROUP>
+    <FILE id="pKBbWL" name="LatentSeer.cpp" compile="1" resource="0" file="Source/LatentSeer.cpp"/>
+    <FILE id="zw2wrE" name="LatentSeer.h" compile="0" resource="0" file="Source/LatentSeer.h"/>
   </MAINGROUP>
   <EXPORTFORMATS>
     <XCODE_MAC targetFolder="Builds/MacOSX">
