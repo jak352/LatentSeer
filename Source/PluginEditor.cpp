@@ -22,7 +22,7 @@ LatentSeerAudioProcessorEditor::LatentSeerAudioProcessorEditor (LatentSeerAudioP
     //Min, max, interval:
     mBPM_Slider.setRange (40u, 240u, 1u);
     //Starting value
-    mBPM_Slider.setValue (processor.mBPM);
+    mBPM_Slider.setValue (processor.latentSeer.getBpm());
     //What's listening for changes in the slider? "this" is a pointer to this class
     mBPM_Slider.addListener (this);
     //Make it a visible child of LatentSeerAudioProcessorEditor:
@@ -34,7 +34,7 @@ LatentSeerAudioProcessorEditor::LatentSeerAudioProcessorEditor (LatentSeerAudioP
     //Min, max, interval:
     mBeatsPerBar_Slider.setRange (1.0f, 6.0f, 0.5f);
     //Starting value
-    mBeatsPerBar_Slider.setValue (processor.mBeatsPerBar);
+    mBeatsPerBar_Slider.setValue (processor.latentSeer.getBeatsPerBar());
     //What's listening for changes in the slider? "this" is a pointer to this class
     mBeatsPerBar_Slider.addListener (this);
     //Make it a visible child of LatentSeerAudioProcessorEditor:
@@ -46,7 +46,7 @@ LatentSeerAudioProcessorEditor::LatentSeerAudioProcessorEditor (LatentSeerAudioP
     //Min, max, interval:
     mGainSlider.setRange (0.0f, 1.0f, 0.01f);
     //Starting value
-    mGainSlider.setValue (processor.mGain);
+    mGainSlider.setValue (processor.latentSeer.getGain());
     //What's listening for changes in the slider? "this" is a pointer to this class
     mGainSlider.addListener (this);
     //Make it a visible child of LatentSeerAudioProcessorEditor:
@@ -58,7 +58,7 @@ LatentSeerAudioProcessorEditor::LatentSeerAudioProcessorEditor (LatentSeerAudioP
     //Min, max, interval:
     mDelay_ms_Slider.setRange (-100L, 0L, 1.0L);
     //Starting value
-    mDelay_ms_Slider.setValue (processor.mDelay_ms);
+    mDelay_ms_Slider.setValue (processor.latentSeer.getDelay());
     //What's listening for changes in the slider? "this" is a pointer to this class
     mDelay_ms_Slider.addListener (this);
     //Make it a visible child of LatentSeerAudioProcessorEditor:
@@ -70,7 +70,7 @@ LatentSeerAudioProcessorEditor::LatentSeerAudioProcessorEditor (LatentSeerAudioP
     //Min, max, interval:
     mDelayVolume_Slider.setRange (0.0f, 1.0f, 0.01f);
     //Starting value
-    mDelayVolume_Slider.setValue (processor.mDelayVolume);
+    mDelayVolume_Slider.setValue (processor.latentSeer.getDelayVolume());
     //What's listening for changes in the slider? "this" is a pointer to this class
     mDelayVolume_Slider.addListener (this);
     //Make it a visible child of LatentSeerAudioProcessorEditor:
@@ -82,7 +82,7 @@ LatentSeerAudioProcessorEditor::LatentSeerAudioProcessorEditor (LatentSeerAudioP
     //Min, max, interval:
     mTransientThreshInDelayed_Slider.setRange (-60.0f, 0.0f, 0.1f);
     //Starting value
-    mTransientThreshInDelayed_Slider.setValue (processor.mTransientThreshInDelayed);
+    mTransientThreshInDelayed_Slider.setValue (processor.latentSeer.getTransientThreshold());
     //What's listening for changes in the slider? "this" is a pointer to this class
     mTransientThreshInDelayed_Slider.addListener (this);
     //Make it a visible child of LatentSeerAudioProcessorEditor:
@@ -94,7 +94,7 @@ LatentSeerAudioProcessorEditor::LatentSeerAudioProcessorEditor (LatentSeerAudioP
 //    //Min, max, interval:
 //    mReleaseThreshInDelayed_Slider.setRange (-60.0f, 0.0f, 0.1f);
 //    //Starting value
-//    mReleaseThreshInDelayed_Slider.setValue (processor.mReleaseThreshInDelayed);
+//    mReleaseThreshInDelayed_Slider.setValue (processor.latentSeer.mReleaseThreshInDelayed);
 //    //What's listening for changes in the slider? "this" is a pointer to this class
 //    mReleaseThreshInDelayed_Slider.addListener (this);
 //    //Make it a visible child of LatentSeerAudioProcessorEditor:
@@ -106,7 +106,7 @@ LatentSeerAudioProcessorEditor::LatentSeerAudioProcessorEditor (LatentSeerAudioP
     //Min, max, interval:
     mPitchChangeThreshold_Slider.setRange (0.0f, 1.0f, 0.01f);
     //Starting value
-    mPitchChangeThreshold_Slider.setValue (processor.mPitchChangeThreshold);
+    mPitchChangeThreshold_Slider.setValue (processor.latentSeer.getPitchThreshold());
     //What's listening for changes in the slider? "this" is a pointer to this class
     mPitchChangeThreshold_Slider.addListener (this);
     //Make it a visible child of LatentSeerAudioProcessorEditor:
@@ -118,7 +118,7 @@ LatentSeerAudioProcessorEditor::LatentSeerAudioProcessorEditor (LatentSeerAudioP
     //Min, max, interval:
     mLowestFrequency_Slider.setRange (30.0f, 300.0f, 1.0f);
     //Starting value
-    mLowestFrequency_Slider.setValue (processor.mLowestFrequency);
+    mLowestFrequency_Slider.setValue (processor.latentSeer.getLowestFreq());
     //What's listening for changes in the slider? "this" is a pointer to this class
     mLowestFrequency_Slider.addListener (this);
     //Make it a visible child of LatentSeerAudioProcessorEditor:
@@ -178,39 +178,39 @@ void LatentSeerAudioProcessorEditor::sliderValueChanged (Slider *slider)
 {
     if (slider == &mGainSlider)
     {
-        processor.mGain = mGainSlider.getValue();
+        processor.latentSeer.setGain(mGainSlider.getValue());
     }
     if (slider == &mDelay_ms_Slider)
     {
-        processor.mDelay_ms = mDelay_ms_Slider.getValue();
+    processor.latentSeer.setDelay(mDelay_ms_Slider.getValue());
     }
     if (slider == &mDelayVolume_Slider)
     {
-        processor.mDelayVolume = mDelayVolume_Slider.getValue();
+        processor.latentSeer.setDelayVolume(mDelayVolume_Slider.getValue());
     }
     if (slider == &mBPM_Slider)
     {
-        processor.mBPM = mBPM_Slider.getValue();
+        processor.latentSeer.setBpm(mBPM_Slider.getValue());
     }
     if (slider == &mBeatsPerBar_Slider)
     {
-        processor.mBeatsPerBar = mBeatsPerBar_Slider.getValue();
+        processor.latentSeer.setBeatsPerBar(mBeatsPerBar_Slider.getValue());
     }
     if (slider == &mTransientThreshInDelayed_Slider)
     {
-        processor.mTransientThreshInDelayed = mTransientThreshInDelayed_Slider.getValue();
-        processor.mReleaseThreshInDelayed = processor.mTransientThreshInDelayed - 18.0;
+        processor.latentSeer.setTransientThreshold(mTransientThreshInDelayed_Slider.getValue());
+        processor.latentSeer.setReleaseThreshold(processor.latentSeer.getTransientThreshold() - 18.0);
     }
 //    if (slider == &mReleaseThreshInDelayed_Slider)
 //    {
-//        processor.mReleaseThreshInDelayed = mReleaseThreshInDelayed_Slider.getValue();
+//        processor.latentSeer.mReleaseThreshInDelayed = mReleaseThreshInDelayed_Slider.getValue();
 //    }
     if (slider == &mPitchChangeThreshold_Slider)
     {
-        processor.mPitchChangeThreshold = mPitchChangeThreshold_Slider.getValue();
+        processor.latentSeer.setPitchThreshold(mPitchChangeThreshold_Slider.getValue());
     }
     if (slider == &mLowestFrequency_Slider)
     {
-        processor.mLowestFrequency = mLowestFrequency_Slider.getValue();
+        processor.latentSeer.setLowestFreq(mLowestFrequency_Slider.getValue());
     }
 }
