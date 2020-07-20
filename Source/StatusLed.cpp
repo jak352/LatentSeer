@@ -22,7 +22,24 @@ void StatusLed::paint (juce::Graphics& g)
     
     if (stateSource)
     {
-        g.setColour ((*stateSource) ? juce::Colours::lightgreen : juce::Colours::darkblue);
+        if (ledTurningOn)
+        {
+            colourInterp += colourStep;
+            if (colourInterp >= 1.0)
+            {
+                colourInterp = 1.01;
+                ledTurningOn = false;
+            }
+        }
+        else
+        {
+            colourInterp -= colourStep;
+            if (colourInterp < 0.0)
+            {
+                colourInterp = 0.0;
+            }
+        }
+        g.setColour (offColour.interpolatedWith(onColour, colourInterp));        
         g.fillEllipse(0, 0, getWidth(), getHeight());
     }
     
@@ -41,9 +58,10 @@ void StatusLed::timerCallback ()
     {
         if (prevState != *stateSource)
         {
-            repaint();
+            ledTurningOn = true;
             prevState = *stateSource;
         }
+         repaint();
     }
     
 }
