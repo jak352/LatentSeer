@@ -64,10 +64,11 @@ public:
         return meterSource;
     }
     //==============================================================================
+    /// <#Description#>
+    const bool* getTransientStatePointer();
 private:
     foleys::LevelMeterSource meterSource;
 
-    const bool* getTransientStatePointer();
 private:
     bool transientState = false;
 
