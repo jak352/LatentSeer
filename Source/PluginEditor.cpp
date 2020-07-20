@@ -124,6 +124,8 @@ LatentSeerAudioProcessorEditor::LatentSeerAudioProcessorEditor (LatentSeerAudioP
     //Make it a visible child of LatentSeerAudioProcessorEditor:
     addAndMakeVisible (mLowestFrequency_Slider);
     
+    led.setSource(processor.getTransientStatePointer());
+    addAndMakeVisible(led);
     // Make sure that before the constructor has finished, you've set the
     // editor's size to whatever you need it to be.
     setSize (950, 400);
@@ -152,11 +154,7 @@ void LatentSeerAudioProcessorEditor::paint (Graphics& g)
     g.drawFittedText ("Atack Thresh.", getWidth() / 2 + 100, getHeight() / 2 - 90, 100, 20, Justification::centred, 1);
     //g.drawFittedText ("Release Thresh.", getWidth() / 2 + 200, getHeight() / 2 - 90, 100, 20, Justification::centred, 1);
     g.drawFittedText ("Pitch Sensitivity", getWidth() / 2 + 200, getHeight() / 2 - 90, 100, 20, Justification::centred, 1);
-    g.drawFittedText ("Min. Freq. (Hz)", getWidth() / 2 + 300, getHeight() / 2 - 90, 100, 20, Justification::centred, 1);
-    //g.setColour(Colours::saddlebrown);
-    //g.setColour(Colours::orange);//need to use mDelayBufferThresholdExceeded somehow
-    //g.fillEllipse(getWidth() / 2 + 250 - 20/2, getHeight() / 2 - 120, 20, 20);
-    //StatusLight(<#StatusLight *light#>);
+    g.drawFittedText ("Min. Freq. (Hz)", getWidth() / 2 + 300, getHeight() / 2 - 90, 100, 20, Justification::centred, 1);    
 }
 
 void LatentSeerAudioProcessorEditor::resized()
@@ -172,6 +170,8 @@ void LatentSeerAudioProcessorEditor::resized()
     //mReleaseThreshInDelayed_Slider.setBounds(getWidth() / 2 + 200, getHeight() / 2 - 75, 100, 150); // position and size
     mPitchChangeThreshold_Slider.setBounds(getWidth() / 2 + 200, getHeight() / 2 - 75, 100, 150); // position and size
     mLowestFrequency_Slider.setBounds(getWidth() / 2 + 300, getHeight() / 2 - 75, 100, 150); // position and size
+    
+    led.setBounds(getWidth() / 2 + 250 - 20/2, getHeight() / 2 - 120, 20, 20);
 }
 
 void LatentSeerAudioProcessorEditor::sliderValueChanged (Slider *slider)

@@ -56,7 +56,9 @@ public:
     void setStateInformation (const void* data, int sizeInBytes) override;
     ///
     LatentSeer latentSeer;
+    const bool* getTransientStatePointer();
 private:
+    bool transientState = false;
     //==============================================================================
     JUCE_DECLARE_NON_COPYABLE_WITH_LEAK_DETECTOR (LatentSeerAudioProcessor)
 };
