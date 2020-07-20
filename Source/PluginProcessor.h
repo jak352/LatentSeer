@@ -57,6 +57,7 @@ public:
     //==============================================================================
     ///
     LatentSeer latentSeer;
+
     //==============================================================================
     foleys::LevelMeterSource& getMeterSource()
     {
@@ -65,6 +66,11 @@ public:
     //==============================================================================
 private:
     foleys::LevelMeterSource meterSource;
+
+    const bool* getTransientStatePointer();
+private:
+    bool transientState = false;
+
     //==============================================================================
     JUCE_DECLARE_NON_COPYABLE_WITH_LEAK_DETECTOR (LatentSeerAudioProcessor)
 };

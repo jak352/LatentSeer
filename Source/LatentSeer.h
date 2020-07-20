@@ -46,6 +46,10 @@ public:
     void process(int totalNumInputChannels, AudioBuffer<float>& buffer);
     ///
     void fillDelayBuffer(int channel, const int bufferLength, const int delayBufferLength, const float* bufferData, const float* delayBufferData);
+    /// discover if there has been a transient over the previous n milliseconds
+    /// @param msLookBack milliseconds to look back
+    /// @return true if transient false if not
+    bool hadTransient(int msLookBack);
     //==========================================================================
     // Getters and Setters
     ///
@@ -149,7 +153,6 @@ private:
     int mSampleRate { 44100 };
     /// 0.75*mSampleRate/30.0 for 192kHz for instance
     int mPitchBufferLength { 4800 };
-    
     //For getting bpm from a DAW https://forum.juce.com/t/getting-bpm-and-beats/13151/5
     ///
     //AudioPlayHead* playHead;

@@ -12,6 +12,7 @@
 
 #include <JuceHeader.h>
 #include "PluginProcessor.h"
+#include "StatusLed.h"
 
 //==============================================================================
 /**
@@ -45,7 +46,8 @@ private:
     //Slider mReleaseThreshInDelayed_Slider;
     Slider mPitchChangeThreshold_Slider;
     Slider mLowestFrequency_Slider;
-    
+    StatusLed led;
     LatentSeerAudioProcessor& processor;
+    
     JUCE_DECLARE_NON_COPYABLE_WITH_LEAK_DETECTOR (LatentSeerAudioProcessorEditor)
 };

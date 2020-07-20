@@ -13,9 +13,9 @@
 
 void LatentSeer::setup(double sampleRate, int samplesPerBlock, int numInputChannels)
 {
-    mSampleRate = sampleRate;//Get sample rate
+    mSampleRate = sampleRate; // Get sample rate
     
-    const int delayBufferSize = ((6*60/40) * sampleRate) + samplesPerBlock; //6 beats of 40bpm plus a little bit
+    const int delayBufferSize = ((6*60/40) * sampleRate) + samplesPerBlock; // 6 beats of 40bpm plus a little bit
     
     //Number of buffers back to look back on to assess whether pitch has changed:
     mNBack = static_cast<int>( sampleRate * 0.020 / samplesPerBlock );
@@ -228,7 +228,7 @@ void LatentSeer::checkIfThresholdExceeded(const int bufferLength)
         mReleaseCounter = 0;
         mPitchDetectCounter = 0;//Stops note off causing mPitchDetectCounter to get stuck high
     }
-    else if ( ( mDelayBufferMagnitude > Decibels::decibelsToGain (mTransientThreshInDelayed) ) & ( mTransientCounter == 0 ) & ( ( mReleaseCounter > mNumBuffersForRelease ) || (
+    else if ( ( mDelayBufferMagnitude > Decibels::decibelsToGain (mTransientThreshInDelayed) ) && ( mTransientCounter == 0 ) && ( ( mReleaseCounter > mNumBuffersForRelease ) || (
                                                                                                                                                                                 mPitchDetectCounter == mNBack ) ) )
         //mNormalisedXCorMax < mPitchChangeThreshold ) ) )
     {
@@ -238,17 +238,17 @@ void LatentSeer::checkIfThresholdExceeded(const int bufferLength)
         mTransientCounter = 1;
         //mPitchDetectCounter++;//Put change detect counter out of range so can only be retriggered when under threshold is detected.
     }
-    else if ( mDelayBufferThresholdExceeded == true )
+    else if (mDelayBufferThresholdExceeded)
     {
         mTransientCounter++; // continue transient playback
         mReleaseCounter = 0;
     }
-    else if ( (mReleaseCounter < mNumBuffersForRelease + 1) & ( mDelayBufferMagnitude < Decibels::decibelsToGain ( mReleaseThreshInDelayed ) ) )
+    else if ( (mReleaseCounter < (mNumBuffersForRelease + 1)) && ( mDelayBufferMagnitude < Decibels::decibelsToGain ( mReleaseThreshInDelayed ) ) )
     {
         mReleaseCounter++; // count release time while transient has recently turned off
     }
     //Check if we are not fading in or fading out the delay transient:
-    mNoFadeOut = ( mTransientCounter != mNumBuffersForRelease + 1 );
+    mNoFadeOut = ( mTransientCounter != (mNumBuffersForRelease + 1));
     //mNoFadeIn = ( mTransientCounter != 0 );
 }
 //------------------------------------------------------------------------------
@@ -332,6 +332,11 @@ void LatentSeer::process(int totalNumInputChannels, AudioBuffer<float>& buffer)
     mWritePosition += bufferLength;
     //modulo to wrap to start of buffer when needed
     mWritePosition %= delayBufferLength;
+}
+
+bool LatentSeer::hadTransient(int msLookBack)
+{
+    return (mTransientCounter > 0);
 }
 //==============================================================================
 // Getters and Setters
@@ -417,3 +422,5 @@ float LatentSeer::getLowestFreq()
 void LatentSeer::setLowestFreq(float freq)
 {
 }
+
+

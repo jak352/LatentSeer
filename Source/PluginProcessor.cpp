@@ -136,6 +136,8 @@ bool LatentSeerAudioProcessor::isBusesLayoutSupported (const BusesLayout& layout
 void LatentSeerAudioProcessor::processBlock (AudioBuffer<float>& buffer, MidiBuffer& midiMessages)
 {
     meterSource.measureBlock (buffer);
+    transientState = latentSeer.hadTransient(40);
+
     ScopedNoDenormals noDenormals;
     auto totalNumInputChannels  = getTotalNumInputChannels();
     auto totalNumOutputChannels = getTotalNumOutputChannels();
@@ -183,3 +185,9 @@ AudioProcessor* JUCE_CALLTYPE createPluginFilter()
 {
     return new LatentSeerAudioProcessor();
 }
+
+const bool* LatentSeerAudioProcessor::getTransientStatePointer()
+{
+    return (const bool*)&transientState;
+}
+
