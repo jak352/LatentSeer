@@ -36,10 +36,9 @@ private:
     //--------------------------------------------------------------------------
     const bool* stateSource = nullptr;
     bool prevState;
-    bool ledTurningOn = true;
+    bool ledTurningOn = false;
     float colourInterp = 0.0;
     float colourStep = 0.25;
-    bool a = true;
     int refreshRate = 30;
     
     juce::Colour onColour  = juce::Colour(0xFF33FF33);

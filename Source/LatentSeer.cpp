@@ -13,9 +13,9 @@
 
 void LatentSeer::setup(double sampleRate, int samplesPerBlock, int numInputChannels)
 {
-    mSampleRate = sampleRate;//Get sample rate
+    mSampleRate = sampleRate; // Get sample rate
     
-    const int delayBufferSize = ((6*60/40) * sampleRate) + samplesPerBlock; //6 beats of 40bpm plus a little bit
+    const int delayBufferSize = ((6*60/40) * sampleRate) + samplesPerBlock; // 6 beats of 40bpm plus a little bit
     
     //Number of buffers back to look back on to assess whether pitch has changed:
     mNBack = static_cast<int>( sampleRate * 0.020 / samplesPerBlock );
