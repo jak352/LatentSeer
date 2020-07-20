@@ -171,7 +171,7 @@ void LatentSeerAudioProcessorEditor::resized()
     mPitchChangeThreshold_Slider.setBounds(getWidth() / 2 + 200, getHeight() / 2 - 75, 100, 150); // position and size
     mLowestFrequency_Slider.setBounds(getWidth() / 2 + 300, getHeight() / 2 - 75, 100, 150); // position and size
     
-    led.setBounds(getWidth() / 2 + 250 - 20/2, getHeight() / 2 - 120, 20, 20);
+    led.setBounds(getWidth() / 2 + 255 - 20/2, getHeight() / 2 - 110, 10, 10);
 }
 
 void LatentSeerAudioProcessorEditor::sliderValueChanged (Slider *slider)

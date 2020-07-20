@@ -38,7 +38,7 @@ private:
     bool prevState;
     bool ledTurningOn = true;
     float colourInterp = 0.0;
-    float colourStep = 0.3;
+    float colourStep = 0.25;
     bool a = true;
     int refreshRate = 30;
     

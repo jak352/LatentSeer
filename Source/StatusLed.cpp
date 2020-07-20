@@ -18,7 +18,7 @@ StatusLed::StatusLed() noexcept
 
 void StatusLed::paint (juce::Graphics& g)
 {
-    g.fillAll (juce::Colours::black);
+    g.fillAll (getLookAndFeel().findColour (ResizableWindow::backgroundColourId));
     
     if (stateSource)
     {
