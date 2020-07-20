@@ -22,7 +22,7 @@ void StatusLed::paint (juce::Graphics& g)
     
     if (stateSource)
     {
-        g.setColour ((*stateSource) ? juce::Colours::green : juce::Colours::lightblue);
+        g.setColour ((*stateSource) ? juce::Colours::lightgreen : juce::Colours::darkblue);
         g.fillEllipse(0, 0, getWidth(), getHeight());
     }
     
