@@ -97,6 +97,9 @@ void LatentSeerAudioProcessor::prepareToPlay (double sampleRate, int samplesPerB
 {
     // Use this method as the place to do any pre-playback
     // initialisation that you need..
+    // this prepares the meterSource to measure all output blocks and average over 100ms to allow smooth movements
+    meterSource.resize (getTotalNumOutputChannels(), sampleRate * 0.1 / samplesPerBlock);
+    // ...
     latentSeer.setup(sampleRate, samplesPerBlock, getTotalNumInputChannels());
 }
 
@@ -132,7 +135,9 @@ bool LatentSeerAudioProcessor::isBusesLayoutSupported (const BusesLayout& layout
 
 void LatentSeerAudioProcessor::processBlock (AudioBuffer<float>& buffer, MidiBuffer& midiMessages)
 {
+    meterSource.measureBlock (buffer);
     transientState = latentSeer.hadTransient(40);
+
     ScopedNoDenormals noDenormals;
     auto totalNumInputChannels  = getTotalNumInputChannels();
     auto totalNumOutputChannels = getTotalNumOutputChannels();
